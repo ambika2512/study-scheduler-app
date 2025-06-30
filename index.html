@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Scheduler - Plan, Track, Achieve</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>Study Scheduler</h1>
+                    <p>Plan, track, and achieve your learning goals</p>
+                </div>
+                <div class="user-profile">
+                    <div class="user-info">
+                        <span class="user-name">Ambika Rani</span>
+                        <span class="user-streak">7 day streak</span>
+                    </div>
+                    <div class="user-avatar">AR</div>
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+            <button class="nav-btn active" data-tab="dashboard">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-btn" data-tab="planner">
+                <i class="fas fa-calendar"></i>
+                <span>Study Planner</span>
+            </button>
+            <button class="nav-btn" data-tab="todo">
+                <i class="fas fa-check-square"></i>
+                <span>To-Do List</span>
+            </button>
+            <button class="nav-btn" data-tab="analytics">
+                <i class="fas fa-chart-bar"></i>
+                <span>Analytics</span>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="welcome-section">
+                    <h2>Welcome back, Ambika Rani!</h2>
+                    <p>Ready to continue your learning journey?</p>
+                    <div class="welcome-stats">
+                        <div class="welcome-stat">Today's Goal: 6 hours</div>
+                        <div class="welcome-stat">Streak: 7 days</div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">4.5</div>
+                            <div class="stat-label">Study Hours Today</div>
+                            <div class="stat-progress">
+                                <div class="progress-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card green">
+                        <div class="stat-icon">
+                            <i class="fas fa-target"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Topics Completed</div>
+                            <div class="stat-progress">
+                                <div class="progress-bar" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card orange">
+                        <div class="stat-icon">
+                            <i class="fas fa-trending-up"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label">Weekly Progress</div>
+                            <div class="stat-progress">
+                                <div class="progress-bar" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-card purple">
+                        <div class="stat-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Active Courses</div>
+                            <div class="stat-progress">
+                                <div class="progress-bar" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="chart-card">
+                        <h3>Progress Chart</h3>
+                        <div class="chart-placeholder">
+                            <canvas id="progressChart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon green">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Completed React Hooks</div>
+                                    <div class="activity-time">2 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon blue">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Started JavaScript Arrays</div>
+                                    <div class="activity-time">4 hours ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Planner Tab -->
+            <div id="planner" class="tab-content">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>Study Planner</h2>
+                        <p>Organize your courses and track progress</p>
+                    </div>
+                    <button class="primary-btn" onclick="openAddCourseModal()">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Course</span>
+                    </button>
+                </div>
+
+                <div class="quick-stats">
+                    <div class="quick-stat">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <div class="stat-label">Next Session</div>
+                            <div class="stat-value">Today, 2:00 PM</div>
+                        </div>
+                    </div>
+                    <div class="quick-stat">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <div class="stat-label">Total Study Time</div>
+                            <div class="stat-value">58 hours</div>
+                        </div>
+                    </div>
+                    <div class="quick-stat">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <div class="stat-label">Completed Topics</div>
+                            <div class="stat-value">35 / 60</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="courses-grid" id="coursesGrid">
+                    <!-- Courses will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Todo List Tab -->
+            <div id="todo" class="tab-content">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>To-Do List</h2>
+                        <p>Manage your tasks and stay organized</p>
+                    </div>
+                    <button class="primary-btn green" onclick="openAddTodoModal()">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Task</span>
+                    </button>
+                </div>
+
+                <div class="todo-stats">
+                    <div class="todo-stat">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Total Tasks</div>
+                    </div>
+                    <div class="todo-stat">
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="todo-stat">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                    <div class="todo-stat">
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">High Priority</div>
+                    </div>
+                </div>
+
+                <div class="todo-filters">
+                    <i class="fas fa-filter"></i>
+                    <button class="filter-btn active" data-filter="all">All Tasks</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                    <button class="filter-btn" data-filter="high">High Priority</button>
+                </div>
+
+                <div class="todo-list" id="todoList">
+                    <!-- Todo items will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tab-content">
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>Analytics</h2>
+                        <p>Track your progress and improve performance</p>
+                    </div>
+                    <div class="time-range-buttons">
+                        <button class="filter-btn active">Week</button>
+                        <button class="filter-btn">Month</button>
+                        <button class="filter-btn">Year</button>
+                    </div>
+                </div>
+
+                <div class="analytics-insights">
+                    <div class="insight-card yellow">
+                        <div class="insight-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="insight-content">
+                            <div class="insight-value">Saturday</div>
+                            <div class="insight-label">Most Productive Day</div>
+                            <div class="insight-desc">You study 8.2 hours on average</div>
+                        </div>
+                    </div>
+                    <div class="insight-card blue">
+                        <div class="insight-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="insight-content">
+                            <div class="insight-value">6.2h</div>
+                            <div class="insight-label">Average Study Time</div>
+                            <div class="insight-desc">Daily average this week</div>
+                        </div>
+                    </div>
+                    <div class="insight-card green">
+                        <div class="insight-icon">
+                            <i class="fas fa-target"></i>
+                        </div>
+                        <div class="insight-content">
+                            <div class="insight-value">89%</div>
+                            <div class="insight-label">Completion Rate</div>
+                            <div class="insight-desc">Tasks completed on time</div>
+                        </div>
+                    </div>
+                    <div class="insight-card purple">
+                        <div class="insight-icon">
+                            <i class="fas fa-trending-up"></i>
+                        </div>
+                        <div class="insight-content">
+                            <div class="insight-value">88%</div>
+                            <div class="insight-label">Productivity Score</div>
+                            <div class="insight-desc">Based on goals achieved</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analytics-charts">
+                    <div class="chart-card">
+                        <h3>Weekly Activity</h3>
+                        <canvas id="weeklyChart" width="400" height="300"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Course Progress</h3>
+                        <canvas id="courseChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="addCourseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Course</h3>
+                <button class="close-btn" onclick="closeAddCourseModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addCourseForm">
+                <input type="text" placeholder="Course Title" required>
+                <textarea placeholder="Course Description" required></textarea>
+                <input type="number" placeholder="Total Topics" required>
+                <input type="number" placeholder="Estimated Hours" required>
+                <div class="modal-actions">
+                    <button type="button" class="secondary-btn" onclick="closeAddCourseModal()">Cancel</button>
+                    <button type="submit" class="primary-btn">Add Course</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="addTodoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Task</h3>
+                <button class="close-btn" onclick="closeAddTodoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addTodoForm">
+                <input type="text" placeholder="Task Title" required>
+                <textarea placeholder="Task Description" required></textarea>
+                <select required>
+                    <option value="">Select Priority</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <input type="date" required>
+                <div class="modal-actions">
+                    <button type="button" class="secondary-btn" onclick="closeAddTodoModal()">Cancel</button>
+                    <button type="submit" class="primary-btn green">Add Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
